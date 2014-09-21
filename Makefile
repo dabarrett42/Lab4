@@ -19,4 +19,9 @@ all: Project
 
 Project: 		$(FILES)
 			$(LINK) $(EXECUTABLE) $(FILES) $(LIBS)
-
+CLGUI.o: CLGUI.h CircularList.h CLGUI.cpp
+		 $(COMPILE) CLGUI.cpp
+		 
+CLGUIDriver.o: CircularList.h CLGUIDriver.cpp
+			 $(COMPILE) CLGUIDriver.cpp
+			

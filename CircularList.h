@@ -63,16 +63,7 @@ DoubleNode<T>* CircularList<T>::find(int index)
  
    if (index >= loc_pos)
    {
-<<<<<<< HEAD
-                                    //distance without the bridge (next refs, positive)
-                                    //distance using the bridge (prev refs, negative)
-   }
-   else
-   {
-                                    //distance without the bridge (prev refs, negative)
-                                    //distance using the bridge (next refs, positive)
-=======
-      
+
      dist_next = (index - loc_pos);                               //distance without the bridge (next refs, positive)
      dist_prev = ((index - loc_pos) - sze);                               //distance using the bridge (prev refs, negative)
    }
@@ -80,16 +71,13 @@ DoubleNode<T>* CircularList<T>::find(int index)
    {
      dist_prev = (index - loc_pos);                            //distance without the bridge (prev refs, negative)
      dist_next = ((index - loc_pos) + sze);                               //distance using the bridge (next refs, positive)
->>>>>>> origin/master
+
    }
 
    //DO THIS which distance is smaller?
    //find the minimum distance using absolute value
    //set min_dist to the smaller value, keeping the sign
 
-<<<<<<< HEAD
-
-=======
    if(abs(dist_next) < abs(dist_prev))
    {
       min_dist = dist_next;
@@ -99,9 +87,6 @@ DoubleNode<T>* CircularList<T>::find(int index)
    {
       min_dist = dist_prev;
    }
->>>>>>> origin/master
-
-
 
 
    if (min_dist < 0)  //negative distance means use prev links, counterclockwise
@@ -160,28 +145,33 @@ void CircularList<T>::remove(int index)
    //DO THIS
    //remember to move loc and loc_pos to the location of the removal
    //remember to delete the node after it has been removed from the list
+   
+   DoubleNode<T>* positive;
+   DoubleNode<T>* negative;
+   
    if (index >= 1 && index <= sze) 
    {
 
       if (sze == 1) //special case
       {
-
-
-
-
-
-
+		loc = NULL;
+		delete loc;
+		loc_pos = 0;	
       }
       else
       {
          //use local variables
-
-
-
-
-
-
-      }
+		loc=find(index);
+		positive=loc->getNext();
+		negative=loc->getPrev();
+		//
+		positive->setNext(positive);
+		negative->setPrev(negative);
+		//
+		delete loc;
+		loc = positive;
+		loc_pos = index;
+	  }
       sze--;
    } 
 }
