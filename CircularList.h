@@ -1,3 +1,7 @@
+/*
+Names: Christian Bare & Devon Barrett
+Assignment: Lab04/Circular List
+*/
 #if !defined CIRCULARLIST_H
 #define CIRCULARLIST_H
 
@@ -139,13 +143,14 @@ void CircularList<T>::animateMovement(bool clockwise, DoubleNode<T>* where)
    }
 }
 
+//postcondition:loc and loc_pos are moved to the location of the removal
+ //deletes the node after it has been removed from the list
 template < class T >
 void CircularList<T>::remove(int index) 
 {
-   //DO THIS
-   //remember to move loc and loc_pos to the location of the removal
-   //remember to delete the node after it has been removed from the list
+  
    
+   //Local pointer variables that point to either the previous "position" or the next.
    DoubleNode<T>* positive;
    DoubleNode<T>* negative;
    
@@ -161,18 +166,16 @@ void CircularList<T>::remove(int index)
       }
       else
       {
-         //use local variables
-		 //first, find the values for the pointers 
+         //uses local variables
+		 //finds the values for the pointers first 
 		loc=find(index);
 		positive=loc->getNext();
 		negative=loc->getPrev();
-
 		positive->setPrev(negative);
 		negative->setNext(positive);
-
+		//deletes node 
 		delete loc;
 		loc = positive;
-		//loc_pos = index;
 	  }
       sze--;
    } 
