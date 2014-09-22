@@ -154,23 +154,25 @@ void CircularList<T>::remove(int index)
 
       if (sze == 1) //special case
       {
-		loc = NULL;
+		
 		delete loc;
+		loc = NULL;
 		loc_pos = 0;	
       }
       else
       {
          //use local variables
+		 //first, find the values for the pointers 
 		loc=find(index);
 		positive=loc->getNext();
 		negative=loc->getPrev();
-		//
-		positive->setNext(positive);
-		negative->setPrev(negative);
-		//
+
+		positive->setPrev(negative);
+		negative->setNext(positive);
+
 		delete loc;
 		loc = positive;
-		loc_pos = index;
+		//loc_pos = index;
 	  }
       sze--;
    } 
